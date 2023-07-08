@@ -1,0 +1,15 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  replicas: 1
+  serviceAccountName: prometheus
+  serviceMonitorNamespaceSelector:
+    matchLabels:
+      monitoring: prometheus # this should match the namespaces created in the beginning (metadata.labels.monitoring)
+  serviceMonitorSelector:
+    matchLabels:
+      team: devops

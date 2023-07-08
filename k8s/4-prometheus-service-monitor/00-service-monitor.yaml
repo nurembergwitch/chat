@@ -1,0 +1,18 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: chat
+  namespace: chat
+  labels:
+    team: madsu
+spec:
+  selector:
+    matchLabels:
+      app: chat
+  endpoints:
+  - port: web # port of the app service?
+    interval: 15s
+  namespaceSelector:
+    matchNames:
+    - chat
