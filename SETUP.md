@@ -6,15 +6,15 @@
 
     INT_IP=`ip a | grep wlo1 | grep inet | awk '{print $2}' | awk -F'/' '{print $1}'` 
 
-     curl -fL https://get.k3s.io | K3S_TOKEN=${MYSECRET} sh -s - --disable traefik server  --write-kubeconfig-mode 644 --node-ip $INT_IP 
+    curl -fL https://get.k3s.io | K3S_TOKEN=${MYSECRET} sh -s - --disable traefik server  --write-kubeconfig-mode 644 --node-ip $INT_IP 
 
      export KUBECONFIG=/etc/rancher/k3s/k3s.yaml ```
 
 2. Add ns, regcred.
 
-     ```kc apply -f 00-namespaces.yaml 
+    ```kc apply -f 00-namespaces.yaml 
 
-     kc create secret generic regcred --from-file=.dockerconfigjson=/home/mads/.docker/config.json --type=kubernetes.io/dockerconfigjson -n chat ```
+    kc create secret generic regcred --from-file=.dockerconfigjson=/home/mads/.docker/config.json --type=kubernetes.io/dockerconfigjson -n chat ```
 
 3. Enable nginx ingress controller.
 
@@ -22,7 +22,7 @@
 
     kc apply -f 01-nginx-ingress*.yaml```
 
-Wait till it starts ( ` kkckk get svc -n ingress-nginx ` ).
+Wait till it starts ( ` kc get svc -n ingress-nginx ` ).
 
     ` kkk port-forward service/chat-service -n chat 8888:80 `
 or
