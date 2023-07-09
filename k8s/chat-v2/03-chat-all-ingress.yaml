@@ -19,8 +19,8 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
-      affinity:
-        podAntiAffinity:
+      # affinity:
+      #   podAntiAffinity:
         # requiredDuringSchedulingIgnoredDuringExecution:
           #   - labelSelector:
           #       matchExpressions:
@@ -48,7 +48,7 @@ metadata:
   name: chat-service
   namespace: chat
 spec:
-  #type: ClusterIP # doesn't work w ClusterIP. Apparently NodePort is what works w Ingress now. Proof in ingress docs.
+  #type: ClusterIP
   selector:
     app: chat # must match deployment.spec.selector.matchLabels.app
   ports:
@@ -65,6 +65,10 @@ metadata:
   labels:
     name: chat-ingress
 spec:
+  # tls: 
+  # - hosts:
+  #   - madsuchat.com
+  #   secretName: madsuchat # will be created by cert-manager
   ingressClassName: nginx
   rules:
   - host: madsuchat.com
