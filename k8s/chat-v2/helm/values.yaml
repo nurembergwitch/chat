@@ -1,0 +1,21 @@
+webapp:
+  name: chat
+  repo: dirt1991
+  image: shitchat
+  tag: v0.2
+  pullPolicy: IfNotPresent
+
+contPort: 3000 # for convenience
+
+service:
+  type: ClusterIP
+  port: 3000
+
+affinity:
+  antiAffinity:
+    on: true
+    requiredignored: true
+    preferredignored: true
+    
+  
+    
