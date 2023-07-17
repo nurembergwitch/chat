@@ -1,4 +1,4 @@
-# templated helm chart with default values (except for the namespace whcih is ingress-nginx)
+# templated helm chart with default values (except for the namespace which is ingress-nginx)
 ---
 # Source: ingress-nginx/templates/controller-serviceaccount.yaml
 apiVersion: v1
