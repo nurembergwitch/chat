@@ -1,0 +1,31 @@
+---
+# Source: kube-prometheus-stack/templates/alertmanager/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: kps-kube-prometheus-stack-alertmanager
+  namespace: monitoring
+  labels:
+    app: kube-prometheus-stack-alertmanager
+    self-monitor: "true"
+    
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: kps
+    app.kubernetes.io/version: "47.4.0"
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    chart: kube-prometheus-stack-47.4.0
+    release: "kps"
+    heritage: "Helm"
+spec:
+  ports:
+  - name: http-web
+    port: 9093
+    targetPort: 9093
+    protocol: TCP
+  - name: reloader-web
+    port: 8080
+    targetPort: reloader-web
+  selector:
+    app.kubernetes.io/name: alertmanager
+    alertmanager: kps-kube-prometheus-stack-alertmanager
+  type: "ClusterIP"

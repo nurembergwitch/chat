@@ -1,0 +1,20 @@
+---
+# Source: kube-prometheus-stack/charts/grafana/templates/clusterrolebinding.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kps-grafana-clusterrolebinding
+  labels:
+    helm.sh/chart: grafana-6.57.4
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/instance: kps
+    app.kubernetes.io/version: "9.5.5"
+    app.kubernetes.io/managed-by: Helm
+subjects:
+  - kind: ServiceAccount
+    name: kps-grafana
+    namespace: monitoring
+roleRef:
+  kind: ClusterRole
+  name: kps-grafana-clusterrole
+  apiGroup: rbac.authorization.k8s.io

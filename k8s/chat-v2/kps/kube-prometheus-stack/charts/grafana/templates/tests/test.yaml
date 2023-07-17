@@ -1,0 +1,32 @@
+---
+# Source: kube-prometheus-stack/charts/grafana/templates/tests/test.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kps-grafana-test
+  labels:
+    helm.sh/chart: grafana-6.57.4
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/instance: kps
+    app.kubernetes.io/version: "9.5.5"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test-success
+    "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded"
+  namespace: monitoring
+spec:
+  serviceAccountName: kps-grafana-test
+  containers:
+    - name: kps-test
+      image: "docker.io/bats/bats:v1.4.1"
+      imagePullPolicy: "IfNotPresent"
+      command: ["/opt/bats/bin/bats", "-t", "/tests/run.sh"]
+      volumeMounts:
+        - mountPath: /tests
+          name: tests
+          readOnly: true
+  volumes:
+    - name: tests
+      configMap:
+        name: kps-grafana-test
+  restartPolicy: Never

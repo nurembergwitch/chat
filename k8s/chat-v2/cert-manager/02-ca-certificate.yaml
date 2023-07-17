@@ -1,0 +1,18 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mads-ca
+  namespace: cert-manager
+spec:
+  isCA: true
+  duration: 43800h
+  commonName: madsuchat.com 
+  secretName: madsuchat-com-key-pair
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: selfsigned # referencing 01-self-signed-issuer.yaml
+    kind: ClusterIssuer
+    group: cert-manager.io

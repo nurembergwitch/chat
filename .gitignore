@@ -22,7 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-
+./k8s/chat-v2/cert-manager/ca.crt
 .SETUP.md
 ./k8s/0-application
 ./k8s/chat-v2/nginx-ingress-controller-manifests
