@@ -1,6 +1,7 @@
 webapp:
   name: chat
-  repo: dirt1991
+  namespace: chat
+  repo: dirt1992
   image: shitchat
   tag: v0.2
   pullPolicy: IfNotPresent
@@ -11,11 +12,11 @@ service:
   type: ClusterIP
   port: 3000
 
-affinity:
-  antiAffinity:
-    on: true
-    requiredignored: true
-    preferredignored: true
+# affinity:
+  # antiAffinity:
+  #   on: true
+  #   requiredignored: true
+  #   preferredignored: true
     
   
-imagePullSecretsname: regcred
+imagePullSecretsName: regcred
