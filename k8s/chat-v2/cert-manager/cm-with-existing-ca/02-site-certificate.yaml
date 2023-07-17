@@ -1,0 +1,23 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: site-madsuchat-com
+  namespace: staging
+spec:
+  isCA: false
+  duration: 2160h
+  renewBefore: 360h
+  commonName: site.madsuchat.com
+  dnsNames:
+  - site.madsuchat.com
+  - www.site.madsuchat.com
+  secretName: madsuchat-com-key-pair # referencing 00-ca-cluster-issuer
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 4096
+  issuerRef:
+    name: madsuchat-com-ca # referencing 00-ca-cluster-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io

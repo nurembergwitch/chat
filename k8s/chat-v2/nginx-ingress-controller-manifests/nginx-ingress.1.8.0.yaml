@@ -1,3 +1,4 @@
+# templated with default values
 ---
 # Source: ingress-nginx/templates/controller-serviceaccount.yaml
 apiVersion: v1
@@ -283,7 +284,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
+  annotations: {}
   labels:
     helm.sh/chart: ingress-nginx-4.7.0
     app.kubernetes.io/name: ingress-nginx
@@ -459,7 +460,7 @@ spec:
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
-  annotations:
+  annotations: {}
   labels:
     helm.sh/chart: ingress-nginx-4.7.0
     app.kubernetes.io/name: ingress-nginx

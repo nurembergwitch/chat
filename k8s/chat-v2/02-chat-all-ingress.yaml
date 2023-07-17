@@ -68,7 +68,7 @@ spec:
   # tls: 
   # - hosts:
   #   - madsuchat.com
-  #   secretName: madsuchat # will be created by cert-manager
+  #   secretName: mads-ca # will be created by cert-manager
   ingressClassName: nginx
   rules:
   - host: madsuchat.com
