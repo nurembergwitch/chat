@@ -23,16 +23,15 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.webapp.name | default "chat "}}
-  namespace: {{ .Values.webapp.name }}
+  {{- include "metadata" . | nindent 2 }}
 spec:
   selector:
     matchLabels:
-      app: {{ .Values.webapp.name | default "chat "}}
+      app: {{ .Values.webapp.name | default "chat" }}
   template:
     metadata:
       labels:
-        app: {{ .Values.webapp.name | default "chat "}}
+        app: {{ .Values.webapp.name | default "chat" }}
     spec:
       containers:
       - name: {{ .Values.webapp.name | default "chat "}}
@@ -51,10 +50,10 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - {{ $.Values.webapp.name | default "chat "}}
+                      - {{ $.Values.webapp.name | default "chat" }}
               topologyKey: "kubernetes.io/hostname"
           {{ end }}
-          {{ if eq .Values.affinity.antiAffinity.preferredignored true }}
+          {{- if eq .Values.affinity.antiAffinity.preferredignored true -}}
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
             podAffinityTerm:
@@ -63,23 +62,22 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - {{ $.Values.webapp.name | default "chat "}}
+                      - {{ $.Values.webapp.name | default "chat" }}
               topologyKey: "kubernetes.io/hostname"
-          {{ end }}
+          {{- end -}}
         {{- end }}
       {{- end }}
       imagePullSecrets:
-      - name: regcred # shouldn't be here but it's a private repo
+      - name: {{ .Values.imagePullSecretsname | default "regcred" }} # shouldn't be here but it's a private repo
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.webapp.name | default "chat "}}-service
-  namespace: {{ .Values.webapp.name | default "chat "}}
+  {{- include "metadata" . | nindent 2 }}
 spec:
-  type: {{ .Values.webapp.name | default "chat "}}
+  type: {{ .Values.webapp.name | default "chat" }}
   selector:
-    app: {{ .Values.webapp.name | default "chat "}}
+    app: {{ .Values.webapp.name | default "chat" }}
   ports:
   - port: {{ .Values.service.port | default 3000 }}
     targetPort: {{ .Values.contPort | default 3000 }} 
@@ -87,10 +85,9 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.webapp.name | default "chat "}}-ingress
-  namespace: {{ .Values.webapp.name | default "chat "}}
+  {{- include "metadata" . | nindent 2 }}
   labels:
-    name: {{ .Values.webapp.name | default "chat "}}-ingress
+    name: {{ .Values.webapp.name | default "chat" }}-ingress
 spec:
   # tls: 
   # - hosts:
@@ -105,7 +102,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ .Values.webapp.name | default "chat "}}-service
+            name: {{ .Values.webapp.name | default "chat" }}-service
             port:
               number: {{ .Values.service.port | default 3000 }} 
 

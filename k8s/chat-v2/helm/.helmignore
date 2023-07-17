@@ -21,3 +21,5 @@
 .idea/
 *.tmproj
 .vscode/
+
+nginx-ingress-1.8.0.yaml
