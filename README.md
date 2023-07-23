@@ -6,6 +6,6 @@ Used helm charts: [kube-prometheus-stack](https://prometheus-community.github.io
 
 TBA: ~~bitnami metrics, kube-prom-stack, edit endpoint in 5/00, Helm chart version of the app, TLS cert~~, Ceph, zero downtime, edit flux.
 
-TBA2: the same but with a wordpress mysql app starting with dockerizing it.
+~TBA2: the same but with a wordpress mysql app.~
 
 TBA3: add some db to the cafe app, deploy on k8s.
